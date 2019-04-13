@@ -1,0 +1,38 @@
+<html>
+<head>
+<script>
+function showUser(str) {
+    if (str == "") {
+        document.getElementById("melumat").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("melumat").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getuser.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
+</head>
+<body>
+
+<form>
+<select name="users" onchange="showUser(this.value)">
+  <option value="">Melumati Sec:</option>
+  <option value="1">Alvise Valente</option>
+  <option value="2">Parvin Asgarov</option>
+  </select>
+</form>
+<br>
+<div id="melumat"><b>Melumatlar yuklenir...</b></div>
+
+</body>
+</html>
